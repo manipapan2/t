@@ -224,11 +224,61 @@
         }
 
         function main2(x,y){
+            // var panelx = panel.offsetLeft
+            // var panely = panel.offsetTop
+
+            // xx = x - (panelx+15)
+            // yy = y - (panely+15)
+            
+            // if(xx > 60){
+            //     panelController.style.left = 60 + "px"
+            //     // ggg = -1
+            // }
+            // else if(xx < 0){
+            //     panelController.style.left = 0 + "px"
+            //     // ggg = 1
+            // }
+            // else if(xx > 0 && xx < 60){
+            //     panelController.style.left = xx + "px"
+            //     // ggg = 1
+            //     // ball.style.left=ball.offsetLeft-1 + "px"
+            // }
+
+            // if(yy > 60){
+            //     panelController.style.top = 60 + "px"
+            // }
+            // else if(yy < 0){
+            //     panelController.style.top = 0 + "px"
+            // }
+            // else{
+            //     panelController.style.top = yy + "px"
+            // }
+
+            // if(xx>30){
+            //     ggg=-5
+            // }
+            // if(xx<30){
+            //     ggg=5
+            // }
+
+            // if(yy>30){
+            //     hhh=-5
+            // }
+            // if(yy<30){
+            //     hhh=5
+            // }
+            // if(yy > 30 && yy < 40){
+            //     hhh = 0
+            // }
+            // if(xx > 30 && xx < 40){
+            //     ggg = 0
+            // }
+
             var panelx = panel.offsetLeft
             var panely = panel.offsetTop
 
-            xx = x - (panelx+15)
-            yy = y - (panely+15)
+            xx = e.clientX - (panelx+15)
+            yy = e.clientY - (panely+15)
             
             if(xx > 60){
                 panelController.style.left = 60 + "px"
@@ -254,25 +304,51 @@
                 panelController.style.top = yy + "px"
             }
 
-            if(xx>30){
-                ggg=-5
+            // if(xx>30){
+            //     ggg=-5
+            // }
+            // if(xx<30){
+            //     ggg=5
+            // }
+
+            // if(yy>30){
+            //     hhh=-5
+            // }
+            // if(yy<30){
+            //     hhh=5
+            // }
+            // if(yy > 30 && yy < 40){
+            //     hhh = 0
+            // }
+            // if(xx > 30 && xx < 40){
+            //     ggg = 0
+            // }
+            var speed = 6
+            var tagsim = 5
+            if((xx-30)/tagsim > speed){
+                ggg = speed
             }
-            if(xx<30){
-                ggg=5
+            if((xx-30)/tagsim < speed * -1){
+                ggg = -speed
+            }
+            if((xx-30)/tagsim < speed && (xx-30)/tagsim > speed * -1){
+                ggg = (xx-30)/tagsim
+            }
+            if((yy-30)/tagsim > speed){
+                hhh = speed
+            }
+            if((yy-30)/tagsim < speed * -1){
+                hhh = -speed
+            }
+            if((yy-30)/tagsim < speed && (yy-30)/tagsim > speed * -1){
+                hhh = (yy-30)/tagsim
             }
 
-            if(yy>30){
-                hhh=-5
-            }
-            if(yy<30){
-                hhh=5
-            }
-            if(yy > 30 && yy < 40){
-                hhh = 0
-            }
-            if(xx > 30 && xx < 40){
-                ggg = 0
-            }
+
+            // if()
+            console.log("1= " + (xx-30)/tagsim)
+            console.log(-speed)
+
             // console.log(xx)
         }
 
