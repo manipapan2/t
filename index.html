@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+      border-style: none;
+      user-select: none;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      font-family: Verdana, sans-serif;
+    }
+    
+    *:focus {
+      outline: none;
+    }
+    
+    html{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    body {
+        position: relative;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .ball{
+        position: absolute;
+        display: flex;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        border-radius: 50%;
+    }
+
+    .panel{
+        position: absolute;
+        width: 90px;
+        height: 90px;
+        bottom: 30px;
+        left: 50%;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        border: 3px solid black;
+    }
+
+    .panel-controller{
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: 30px;
+        left: 30px;
+        border-radius: 50%;
+        background-color: gray;
+    }
+</style>
+<body>
+    
+    <div class="ball" id="ball"></div>
+
+    <div class="panel" id="panel">
+        <div class="panel-controller" id="panelController"></div>
+    </div>
+
+    <script>
+        var ball = document.getElementById("ball")
+        var panel = document.getElementById("panel")
+        var panelController = document.getElementById("panelController")
+
+
+        window.addEventListener("mousedown", (e) => {
+            panel.style.left=e.clientX-45 + "px"
+            panel.style.top=e.clientY-45 + "px"
+            window.addEventListener("mousemove", main)
+        })
+
+        window.addEventListener("touchstart", (e) => {
+            var touch = e.touches[0] || e.changedTouches[0];
+            x = touch.pageX;
+            y = touch.pageY;
+            panel.style.left=x-45 + "px"
+            panel.style.top=y-45 + "px"
+            window.addEventListener("mousemove", main)
+            console.log("bro")
+        })
+
+        window.addEventListener("mouseup", (e) => {
+            window.removeEventListener("mousemove", main)
+            panelController.style.left="30px"
+            panelController.style.top="30px"
+            panel.style.left="50%"
+            panel.style.bottom="30px"
+            panel.style.top="auto"
+            ggg = 0
+            hhh = 0
+        })
+
+        // var touches=[]
+
+        // panel.addEventListener("touchmove", (e) => {
+        // var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        // x = touch.pageX;
+        // y = touch.pageY;
+        //     console.log(x)
+        //     // main(e)
+        // })
+
+        var touches=[]
+
+    window.addEventListener("touchmove", (e) => {
+        var touch = e.touches[0] || e.changedTouches[0];
+        x = touch.pageX;
+        y = touch.pageY;
+        console.log(x)
+        main2(x,y)
+    })
+
+
+
+        window.addEventListener("touchend", () => {
+            panel.removeEventListener("touchmove", main)
+            panelController.style.left="30px"
+            panelController.style.top="30px"
+            panel.style.bottom="30px"
+            panel.style.top="auto"
+            ggg = 0
+            hhh = 0
+            console.log("ssss")
+        })
+
+        function main(e){
+            var panelx = panel.offsetLeft
+            var panely = panel.offsetTop
+
+            xx = e.clientX - (panelx+15)
+            yy = e.clientY - (panely+15)
+            
+            if(xx > 60){
+                panelController.style.left = 60 + "px"
+                // ggg = -1
+            }
+            else if(xx < 0){
+                panelController.style.left = 0 + "px"
+                // ggg = 1
+            }
+            else if(xx > 0 && xx < 60){
+                panelController.style.left = xx + "px"
+                // ggg = 1
+                // ball.style.left=ball.offsetLeft-1 + "px"
+            }
+
+            if(yy > 60){
+                panelController.style.top = 60 + "px"
+            }
+            else if(yy < 0){
+                panelController.style.top = 0 + "px"
+            }
+            else{
+                panelController.style.top = yy + "px"
+            }
+
+            // if(xx>30){
+            //     ggg=-5
+            // }
+            // if(xx<30){
+            //     ggg=5
+            // }
+
+            // if(yy>30){
+            //     hhh=-5
+            // }
+            // if(yy<30){
+            //     hhh=5
+            // }
+            // if(yy > 30 && yy < 40){
+            //     hhh = 0
+            // }
+            // if(xx > 30 && xx < 40){
+            //     ggg = 0
+            // }
+            var speed = 6
+            var tagsim = 5
+            if((xx-30)/tagsim > speed){
+                ggg = speed
+            }
+            if((xx-30)/tagsim < speed * -1){
+                ggg = -speed
+            }
+            if((xx-30)/tagsim < speed && (xx-30)/tagsim > speed * -1){
+                ggg = (xx-30)/tagsim
+            }
+            if((yy-30)/tagsim > speed){
+                hhh = speed
+            }
+            if((yy-30)/tagsim < speed * -1){
+                hhh = -speed
+            }
+            if((yy-30)/tagsim < speed && (yy-30)/tagsim > speed * -1){
+                hhh = (yy-30)/tagsim
+            }
+
+
+            // if()
+            console.log("1= " + (xx-30)/tagsim)
+            console.log(-speed)
+            
+            
+
+        }
+
+        function main2(x,y){
+            var panelx = panel.offsetLeft
+            var panely = panel.offsetTop
+
+            xx = x - (panelx+15)
+            yy = y - (panely+15)
+            
+            if(xx > 60){
+                panelController.style.left = 60 + "px"
+                // ggg = -1
+            }
+            else if(xx < 0){
+                panelController.style.left = 0 + "px"
+                // ggg = 1
+            }
+            else if(xx > 0 && xx < 60){
+                panelController.style.left = xx + "px"
+                // ggg = 1
+                // ball.style.left=ball.offsetLeft-1 + "px"
+            }
+
+            if(yy > 60){
+                panelController.style.top = 60 + "px"
+            }
+            else if(yy < 0){
+                panelController.style.top = 0 + "px"
+            }
+            else{
+                panelController.style.top = yy + "px"
+            }
+
+            if(xx>30){
+                ggg=-5
+            }
+            if(xx<30){
+                ggg=5
+            }
+
+            if(yy>30){
+                hhh=-5
+            }
+            if(yy<30){
+                hhh=5
+            }
+            if(yy > 30 && yy < 40){
+                hhh = 0
+            }
+            if(xx > 30 && xx < 40){
+                ggg = 0
+            }
+            // console.log(xx)
+        }
+
+        var ggg = 0 
+        var hhh = 0 
+
+        setInterval(() => {
+            ball.style.left=ball.offsetLeft+ggg + "px"
+            ball.style.top=ball.offsetTop+hhh + "px"
+        }, 10);
+
+//         panel.addEventListener("touchmove", (e) => {
+//   console.log("yepyyy")
+// });
+
+// panel.addEventListener("touchend", () => {
+//   console.log("nopeyyyyyyyyyyy")
+// });
+
+    </script>
+</body>
+</html>
